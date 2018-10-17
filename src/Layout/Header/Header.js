@@ -1,16 +1,17 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import style from './HeaderStyles';
 
-const style = {
-	AppBar: {
-		backgroundColor: 'purple',
-		height: '100px'
-	},
-	Typography: {
-		marginTop: '30px',
-		fontWeight: '700'
-	}
-};
+// const style = {
+// 	AppBar: {
+// 		backgroundColor: 'purple',
+// 		height: '100px'
+// 	},
+// 	Typography: {
+// 		marginTop: '30px',
+// 		fontWeight: '700'
+// 	}
+// };
 
 export default props =>
 	<div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Header, Footer } from './Layout/Index';
+import Body from './Container/Body/Body';
 import './App.css';
 
 export default class extends Component {
@@ -7,6 +8,7 @@ export default class extends Component {
         return (
             <div className="App">
                 <Header />
+                <Body />
                 <Footer />
             </div>
         );
