@@ -10,8 +10,7 @@ const styles = {
 	}
 };
 
-export default ({ exercises, category }) => {
-	// console.log(category);
+export default ({ exercises, category, onClick, title, description }) => {
 	let muscleGroupList = (muscle) => {
 		return (
 			<Fragment key={muscle}>
@@ -24,7 +23,11 @@ export default ({ exercises, category }) => {
 				<List>
 					{exercises[muscle].map(exercise => {
 						return (
-							<ListItem button key={exercise.title}>
+							<ListItem 
+								button 
+								key={exercise.title}
+								onClick={onClick(exercise.title, exercise.description)}
+							>
 								<ListItemText primary={exercise.title} />
 							</ListItem>
 						);
@@ -49,13 +52,19 @@ export default ({ exercises, category }) => {
 					<Typography
 						variant='display1'
 					>
-						Welcome!
+						{title === ''
+							? 'Welcome!'
+							: title
+						}
 					</Typography>
 					<Typography
 						variant='subheading'
 						style={{marginTop: 20}}
 					>
-						Please select an exercise from the list on the left.
+						{description === ''
+							? 'Please select an exercise from the list on the left.'
+							: description
+						}
 					</Typography>
 				</Paper>
 			</Grid>

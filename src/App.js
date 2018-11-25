@@ -9,17 +9,31 @@ muscles.unshift('All');
 export default class extends Component {
   state = {
     exercises: exercises,
-    value: 0
+    value: 0,
+    title: '',
+    description: ''
   }
 
   setFooterTab = (event, value) => {
-    console.log(event);
     this.setState({ value });
+  }
+  
+  selectExercise = (title, description) => event => {
+    this.setState({
+      title,
+      description
+    });
   }
 
   render() {
+    const {
+      exercises,
+      value,
+      title,
+      description
+    } = this.state;
     let listData = {};
-    for (let exercise of this.state.exercises) {
+    for (let exercise of exercises) {
       listData = listData[exercise.muscles]
         ? {
           ...listData,
@@ -30,18 +44,20 @@ export default class extends Component {
           [exercise.muscles]: [exercise]     
         }
     }
-    // console.log(listData);
-    // console.log(muscles);
+
     return (
       <div className="App">
         <Header />
         <Exercises 
           exercises={listData} 
-          category={muscles[this.state.value]}
+          category={muscles[value]}
+          onClick={this.selectExercise}
+          title={title}
+          description={description}
         />
         <Footer 
           muscles={muscles} 
-          value={this.state.value} 
+          value={value} 
           onChange={this.setFooterTab}
         />
       </div>
