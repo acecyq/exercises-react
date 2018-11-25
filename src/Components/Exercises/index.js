@@ -4,41 +4,59 @@ import { Grid, Paper, Typography, List, ListItem, ListItemText } from '@material
 const styles = {
 	Paper : {
 		padding: 20,
-		margin: 10
+		margin: 10,
+		height: 500,
+		overflowY: 'auto'
 	}
 };
 
-export default ({ exercises }) => {
+export default ({ exercises, category }) => {
+	// console.log(category);
+	let muscleGroupList = (muscle) => {
+		return (
+			<Fragment key={muscle}>
+				<Typography
+					variant='headline'
+					style={{textTransform: 'capitalize'}}
+				>
+					{muscle}
+				</Typography>
+				<List>
+					{exercises[muscle].map(exercise => {
+						return (
+							<ListItem button key={exercise.title}>
+								<ListItemText primary={exercise.title} />
+							</ListItem>
+						);
+					})}
+				</List>
+			</Fragment>
+		);
+	}
+
 	return (
 		<Grid container>
 			<Grid item sm>
 				<Paper style={styles.Paper} >
-					{Object.keys(exercises).map(muscles => {
-						return (
-							<Fragment>
-								<Typography
-									variant='headline'
-									style={{textTransform: 'capitalize'}}
-								>
-									{muscles}
-								</Typography>
-								<List>
-									{exercises[muscles].map(exercise => {
-										return (
-											<ListItem button>
-												<ListItemText primary={exercise.title} />
-											</ListItem>
-										);
-									})}
-								</List>
-							</Fragment>
-						);
-					})}
+					{category === 'All'
+						? Object.keys(exercises).map(muscle => muscleGroupList(muscle))
+						: muscleGroupList(category)
+					}
 				</Paper>
 			</Grid>
 			<Grid item sm>
 				<Paper style={styles.Paper} >
-					Right Pane
+					<Typography
+						variant='display1'
+					>
+						Welcome!
+					</Typography>
+					<Typography
+						variant='subheading'
+						style={{marginTop: 20}}
+					>
+						Please select an exercise from the list on the left.
+					</Typography>
 				</Paper>
 			</Grid>
 		</Grid>

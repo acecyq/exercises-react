@@ -4,9 +4,17 @@ import { Header, Footer } from './Components/Layout';
 import Exercises from './Components/Exercises';
 import { muscles, exercises } from './Store';
 
+muscles.unshift('All');
+
 export default class extends Component {
   state = {
-    exercises: exercises
+    exercises: exercises,
+    value: 0
+  }
+
+  setFooterTab = (event, value) => {
+    console.log(event);
+    this.setState({ value });
   }
 
   render() {
@@ -22,11 +30,20 @@ export default class extends Component {
           [exercise.muscles]: [exercise]     
         }
     }
+    // console.log(listData);
+    // console.log(muscles);
     return (
       <div className="App">
         <Header />
-        <Exercises exercises={listData} />
-        <Footer muscles={muscles} />
+        <Exercises 
+          exercises={listData} 
+          category={muscles[this.state.value]}
+        />
+        <Footer 
+          muscles={muscles} 
+          value={this.state.value} 
+          onChange={this.setFooterTab}
+        />
       </div>
     );
   }

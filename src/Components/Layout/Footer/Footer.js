@@ -1,18 +1,18 @@
 import React from 'react';
 import { Paper, Tabs, Tab} from '@material-ui/core';
 
-export default ({ muscles }) => {
+export default ({ muscles, value, onChange }) => {
 	return (
 		<Paper>
 			<Tabs
-				value={0}
+				value={value}
 				indicatorColor="primary"
 				textColor="primary"
 				centered
+				onChange={onChange}
 			>
-				<Tab label='All' />
 				{muscles.map(group => {
-					return <Tab label={group} />
+					return <Tab label={group} key={group} />
 				})}
 			</Tabs>
 			</Paper>
